@@ -63,6 +63,7 @@ public class MenuBar extends JMenuBar {
         });
         maxres.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_D, 0));
         menu.add(maxres);
+
         //Snapshot item
         JMenuItem screenshot = new JMenuItem("Snapshot");
         screenshot.addActionListener(e -> {
@@ -130,6 +131,19 @@ public class MenuBar extends JMenuBar {
         });
         exit.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Q, ActionEvent.CTRL_MASK));
         menu.add(exit);
+
+        //
+        initUi();
+    }
+
+    private void initUi() {
+        if (settingsDialog.getCurrentWebcam() != null) {
+            Dimension dimension = new Dimension(10000, 10000);
+            LoadingDialog loadingDialog = new LoadingDialog();
+            loadingDialog.load(settingsDialog.getCurrentWebcam(), dimension);
+        } else {
+            JOptionPane.showMessageDialog(null, "No usable webcam could be found", "Webcam warning", JOptionPane.WARNING_MESSAGE);
+        }
     }
 
     /**
